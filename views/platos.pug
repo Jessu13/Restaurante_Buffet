@@ -1,0 +1,18 @@
+h1 Platos 
+
+    each plato in platos 
+        h3 = plato.nombre
+        p = plato.descripcion
+        p 
+            | #{plato.precio} $
+
+    p = JSON.stringify(platos)
+
+h2 Agregar Plato
+    form(action="", method="POST")
+        input(type="text", name="nombreplato", placeholder="Nombre plato")
+        input(type="text", name="descriptplato", placeholder="Descripcion plato")
+        input(type="number", name="precioplato", placeholder="Precio plato")
+        input(type="submit")
+
+
