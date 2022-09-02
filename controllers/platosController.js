@@ -2,10 +2,10 @@ import { Plato } from "../models/Plato.js";
 
 const guardar_platos = (req, res) => {
     //Validar
-    const { nombre, descripcion, precio } = req.body;
+    const { nombre_plato, descripcion, precio } = req.body;
     try {
         Plato.create({
-            nombre,
+            nombre_plato,
             precio,
             descripcion
         });
