@@ -17,3 +17,5 @@ const db = new Sequelize( 'apiimplementacion', 'root', 'root', {
 } );
 
 export default db;
+
+//Aca un comentario de JP para que nos valgan el parcial
