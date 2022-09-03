@@ -18,6 +18,8 @@ app.set('view engine', 'pug');
 // Leer form
 app.use(express.urlencoded({ extended: true }));
 
+app.use(express.json());
+
 app.use((req, res, next) => {
     return next();
 }); 

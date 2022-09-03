@@ -1,15 +1,16 @@
 import { Plato } from "../models/Plato.js";
 
-const guardar_platos = (req, res) => {
+const guardar_platos = async (req, res) => {
     //Validar
     const { nombre_plato, descripcion, precio } = req.body;
     try {
-        Plato.create({
+        const nuevoPlato = await Plato.create({
             nombre_plato,
             precio,
             descripcion
 
         });
+        res.json(nuevoPlato);
         res.redirect('/platos');
     } catch (error) {
         console.log(error);
@@ -18,38 +19,18 @@ const guardar_platos = (req, res) => {
 
 const eliminar_plato = async (req, res) => {
     //Validar
-    const { nombre_plato} = req.body;
     try {
+        const { id } = req.params;
         await Plato.destroy({
-            where: { 
-                nombre: nombre_plato 
+            where:{
+                id,
             },
         });
-        res.redirect('/platos');
+        res.sendStatus(204);
     } catch (error) {
-        console.log(error);
+        return res.status(500).json({message:error.message});
     }
-}
-
-const actualizar_plato = async (req, res) => {
-    //Validar
-    const { nombre_plato, descripcion, precio} = req.body;
-    try {
-        await User.update(
-            {
-                nombre: nombre_plato, 
-                precio: precio,
-                descripcion: descripcion,
-            },
-            {
-                where: { nombre: nombre_plato },
-            }
-        );
-        res.redirect('/platos');
-    } catch (error) {
-        console.log(error);
-    }
-}
+};
 
 
-export { guardar_platos, eliminar_plato, actualizar_plato };
+export { guardar_platos, eliminar_plato };
