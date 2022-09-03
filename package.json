@@ -7,7 +7,7 @@
     "dev": "nodemon index.js"
   },
   "type": "module",
-  "author": "Felipe Cano",
+  "author": "Juan Pablo Munoz",
   "license": "ISC",
   "dependencies": {
     "@hapi/boom": "^10.0.0",
