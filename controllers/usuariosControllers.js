@@ -5,17 +5,18 @@ const guardar_usuario = async (req, res) => {
     const { nombre, telefono, email, direccion } = req.body;
     try {
         const nuevoUsuario = await Usuario.create({
-            nombre, 
+            nombre,
             telefono,
             email,
             direccion
+
         });
         res.json(nuevoUsuario);
         res.redirect('/usuarios');
     } catch (error) {
         console.log(error);
     }
-}
+};
 
 const eliminar_usuario = async (req, res) => {
     //Validar
@@ -40,7 +41,7 @@ const actualizar_usuario = async (req, res) => {
         
         const usuario = await Usuario.findByPk(id)
         usuario.nombre = nombre
-        usuario.telefono= telefono
+        usuario.telefono = telefono
         usuario.email = email
         usuario.direccion = direccion
 
@@ -53,4 +54,4 @@ const actualizar_usuario = async (req, res) => {
 }
 
 
-export { guardar_usuario, eliminar_usuario, actualizar_usuario };
+export { guardar_usuario, eliminar_usuario, actualizar_usuario }

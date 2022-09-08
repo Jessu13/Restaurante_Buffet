@@ -36,10 +36,10 @@ const plato = async (req, res, next) => {
 const p_usuarios = async (req, res) => {
     try{
         const usuarios = await Usuario.findAll();
-        /*res.render('platos', {
-            platos
-        });*/
-        res.json(usuarios)
+        res.render('usuarios', {
+            usuarios
+        });
+        //res.json(usuarios)
     } catch (error) {
         return res.status(500).json({message: error.message});
     }
