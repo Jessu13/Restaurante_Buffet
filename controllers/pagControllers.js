@@ -1,5 +1,6 @@
 import {Plato} from '../models/Plato.js';
 import {Usuario} from '../models/Usuario.js';
+import {Ingrediente} from '../models/Ingrediente.js';
 
 const p_home = (req, res) => {
     res.render('home');
@@ -9,10 +10,10 @@ const p_home = (req, res) => {
 const p_platos = async (req, res) => {
     try{
         const platos = await Plato.findAll();
-        /*res.render('platos', {
+        res.render('platos', {
             platos
-        });*/
-        res.json(platos)
+        });
+        //res.json(platos)
     } catch (error) {
         return res.status(500).json({message: error.message});
     }
@@ -45,9 +46,22 @@ const p_usuarios = async (req, res) => {
     }
 }
 
+const p_ingredientes = async (req, res) => {
+    try{
+        const ingredientes = await Ingrediente.findAll();
+        res.render('ingredientes', {
+            ingredientes
+        });
+        //res.json(ingredientes)
+    } catch (error) {
+        return res.status(500).json({message: error.message});
+    }
+}
+
 
 
 export {p_home, 
         p_platos,
         plato, 
-        p_usuarios};
+        p_usuarios,
+        p_ingredientes};

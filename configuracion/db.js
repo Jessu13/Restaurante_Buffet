@@ -1,6 +1,6 @@
 import Sequelize from "sequelize";
 
-const db = new Sequelize( 'blog_db', 'root', 'root', {
+const db = new Sequelize( 'apiimplementacion', 'root', 'root', {
     host: '127.0.0.1',
     port: '3306',
     dialect: 'mysql', // or 'sqlite', 'postgres', 'mariadb'

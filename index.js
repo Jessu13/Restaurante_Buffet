@@ -27,6 +27,8 @@ app.use((req, res, next) => {
 // Router
 app.use('/', router);
 app.use('/platos', router);
+app.use('/usuarios', router);
+app.use('/ingredientes', router);
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

@@ -1,0 +1,17 @@
+h1 Ingredientes
+
+    each ingrediente in ingredientes
+        h2= ingrediente.nombreIngrediente
+        p= ingrediente.cantidadDisponible
+        p= ingrediente.tipo_Ingrediente
+        p= ingrediente.precioIngrediente
+
+    p= JSON.stringify(ingredientes)
+
+h2 Agregar Ingrediente
+    form(action="/ingredientes", method="POST")
+        input(type="text", name="nombreIngrediente", placeholder="Nombre ingrediente")
+        input(type="text", name="cantidadDisponible", placeholder="Cantidad disponible")
+        input(type="text", name="tipo_Ingrediente", placeholder="Tipo ingrediente")
+        input(type="text", name="precioIngrediente", placeholder="Precio ingrediente")
+        input(type="submit")

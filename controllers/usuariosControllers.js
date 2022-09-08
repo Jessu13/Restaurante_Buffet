@@ -2,10 +2,10 @@ import { Usuario } from "../models/Usuario.js";
 
 const guardar_usuario = async (req, res) => {
     //Validar
-    const { nombre, telefono, email, direccion } = req.body;
+    const { nombreUsuario, telefono, email, direccion } = req.body;
     try {
         const nuevoUsuario = await Usuario.create({
-            nombre,
+            nombreUsuario,
             telefono,
             email,
             direccion
@@ -37,10 +37,10 @@ const actualizar_usuario = async (req, res) => {
     try {
         //Validar
         const { id } = req.params;
-        const {nombre, telefono, email, direccion} = req.body
+        const {nombreUsuario, telefono, email, direccion} = req.body
         
         const usuario = await Usuario.findByPk(id)
-        usuario.nombre = nombre
+        usuario.nombreUsuario = nombreUsuario
         usuario.telefono = telefono
         usuario.email = email
         usuario.direccion = direccion

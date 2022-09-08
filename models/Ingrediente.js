@@ -1,17 +1,17 @@
 import Sequelize from "sequelize";
 import db from "../configuracion/db.js";
 
-export const Usuario = db.define('usuarios', {
-    nombreUsuario: {
+export const Ingrediente = db.define('ingredientes', {
+    nombreIngrediente: {
         type: Sequelize.STRING
     },
-    telefono: {
+    cantidadDisponible: {
         type: Sequelize.INTEGER
     },
-    email: {
+    tipo_Ingrediente: {
         type: Sequelize.STRING
     },
-    direccion: {
-        type: Sequelize.STRING
+    precioIngrediente: {
+        type: Sequelize.INTEGER
     }
 })
