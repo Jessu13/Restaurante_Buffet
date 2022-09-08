@@ -1,0 +1,17 @@
+h1 Usuarios
+
+    each usuario in usuarios
+        h2= usuario.nombre
+        p= usuario.email 
+        p= usuario.telefono 
+        p= usuario.direccion
+
+    p= JSON.stringify(usuarios)
+
+h2 Agregar Usuario
+    form(action="/usuarios", method="POST")
+        input(type="text", name="nombre", placeholder="Nombre usuario")
+        input(type="text", name="telefono", placeholder="Telefono usuario")
+        input(type="text", name="email", placeholder="Email usuario")
+        input(type="text", name="direccion", placeholder="Direccion de residencia")
+        input(type="submit")

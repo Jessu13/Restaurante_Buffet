@@ -1,4 +1,5 @@
 import {Plato} from '../models/Plato.js';
+import {Usuario} from '../models/Usuario.js';
 
 const p_home = (req, res) => {
     res.render('home');
@@ -32,26 +33,21 @@ const plato = async (req, res, next) => {
     }
 }
 
-const actualizar_plato = async (req, res) => {
-    try {
-        //Validar
-        const { id } = req.params;
-        const {nombre_plato, descripcion, precio} = req.body
-        
-        const plato = await Plato.findByPk(id)
-        plato.nombre_plato = nombre_plato
-        plato.descripcion = descripcion
-        plato.precio = precio
-
-        await plato.save();
-
-        res.json(plato);
+const p_usuarios = async (req, res) => {
+    try{
+        const usuarios = await Usuario.findAll();
+        /*res.render('platos', {
+            platos
+        });*/
+        res.json(usuarios)
     } catch (error) {
         return res.status(500).json({message: error.message});
     }
 }
 
+
+
 export {p_home, 
         p_platos,
-        plato,
-        actualizar_plato};
+        plato, 
+        p_usuarios};

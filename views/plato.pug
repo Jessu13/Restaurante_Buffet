@@ -3,10 +3,3 @@ h1 Plato
     p= plato.descripcion
     p 
         | #{plato.precio} $
-
-    h2 Actualizar Plato
-    form(action="", method="PUT")
-        input(type="text", name="nombre_plato", placeholder="Nombre plato")
-        input(type="text", name="descripcion", placeholder="Descripcion plato")
-        input(type="number", name="precio", placeholder="Precio plato")
-        input(type="submit")

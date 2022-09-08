@@ -32,5 +32,24 @@ const eliminar_plato = async (req, res) => {
     }
 };
 
+const actualizar_plato = async (req, res) => {
+    try {
+        //Validar
+        const { id } = req.params;
+        const {nombre_plato, descripcion, precio} = req.body
+        
+        const plato = await Plato.findByPk(id)
+        plato.nombre_plato = nombre_plato
+        plato.descripcion = descripcion
+        plato.precio = precio
 
-export { guardar_platos, eliminar_plato };
+        await plato.save();
+
+        res.json(plato);
+    } catch (error) {
+        return res.status(500).json({message: error.message});
+    }
+}
+
+
+export { guardar_platos, eliminar_plato, actualizar_plato };
