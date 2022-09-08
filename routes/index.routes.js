@@ -4,7 +4,8 @@ import {
     p_platos,
     plato,
     p_usuarios,
-    p_ingredientes
+    p_ingredientes,
+    p_domiciliarios
 } from '../controllers/pagControllers.js';
 
 import { 
@@ -24,6 +25,12 @@ import {
     eliminar_ingrediente,
     actualizar_ingrediente
 } from '../controllers/ingredientesControllers.js';
+
+import {
+    guardar_domiciliarios,
+    eliminar_domiciliario,
+    actualizar_domiciliario
+} from '../controllers/domiciliariosControllers.js';
 
 const router = express.Router();
 
@@ -45,5 +52,10 @@ router.get('/ingredientes', p_ingredientes);
 router.post('/ingredientes', guardar_ingredientes);
 router.put('/ingredientes/:id',actualizar_ingrediente);
 router.delete('/ingredientes/:id', eliminar_ingrediente);
+
+router.get('/domiciliarios', p_domiciliarios);
+router.post('/domiciliarios', guardar_domiciliarios);
+router.put('/domiciliarios/:id',actualizar_domiciliario);
+router.delete('/domiciliarios/:id', eliminar_domiciliario);
 
 export default router;

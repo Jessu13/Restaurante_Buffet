@@ -11,7 +11,7 @@ const guardar_usuario = async (req, res) => {
             direccion
 
         });
-        res.json(nuevoUsuario);
+        //res.json(nuevoUsuario);
         res.redirect('/usuarios');
     } catch (error) {
         console.log(error);

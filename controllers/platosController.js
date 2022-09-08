@@ -10,7 +10,7 @@ const guardar_platos = async (req, res) => {
             descripcion
 
         });
-        res.json(nuevoPlato);
+        //res.json(nuevoPlato);
         res.redirect('/platos');
     } catch (error) {
         console.log(error);

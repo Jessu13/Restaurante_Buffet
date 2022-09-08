@@ -1,6 +1,7 @@
 import {Plato} from '../models/Plato.js';
 import {Usuario} from '../models/Usuario.js';
 import {Ingrediente} from '../models/Ingrediente.js';
+import {Domiciliario} from '../models/Domiciliario.js';
 
 const p_home = (req, res) => {
     res.render('home');
@@ -58,10 +59,23 @@ const p_ingredientes = async (req, res) => {
     }
 }
 
+const p_domiciliarios = async (req, res) => {
+    try{
+        const domiciliarios = await Domiciliario.findAll();
+        res.render('domiciliarios', {
+            domiciliarios
+        });
+        //res.json(domiciliarios)
+    } catch (error) {
+        return res.status(500).json({message: error.message});
+    }
+}
+
 
 
 export {p_home, 
         p_platos,
         plato, 
         p_usuarios,
-        p_ingredientes};
+        p_ingredientes,
+        p_domiciliarios};

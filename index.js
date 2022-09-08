@@ -29,6 +29,7 @@ app.use('/', router);
 app.use('/platos', router);
 app.use('/usuarios', router);
 app.use('/ingredientes', router);
+app.use('/domiciliarios', router);
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
