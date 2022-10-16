@@ -1,4 +1,4 @@
-gitCREATE DATABASE apiimplementacion;
+CREATE DATABASE apiimplementacion;
 
 USE apiimplementacion;
 

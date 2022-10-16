@@ -2,6 +2,7 @@ import {Plato} from '../models/Plato.js';
 import {Usuario} from '../models/Usuario.js';
 import {Ingrediente} from '../models/Ingrediente.js';
 import {Domiciliario} from '../models/Domiciliario.js';
+import sequelize from "sequelize";
 
 const p_home = (req, res) => {
     //res.render('home');
@@ -26,7 +27,7 @@ const plato = async (req, res, next) => {
     const plato = await Plato.findByPk(id);
     if(!plato){
         const error = new Error("El plato no existe")
-        return res.status(400).json({msg: error.message});
+        return res.status(404).json({msg: error.message});
     }
 
     try{
@@ -43,10 +44,12 @@ const plato = async (req, res, next) => {
 const p_usuarios = async (req, res) => {
     try{
         const usuarios = await Usuario.findAll();
-        res.render('usuarios', {
+        res.json(usuarios);
+
+        /*res.render('usuarios', {
             usuarios
-        });
-        //res.json(usuarios)
+        });*/
+        
     } catch (error) {
         return res.status(500).json({message: error.message});
     }

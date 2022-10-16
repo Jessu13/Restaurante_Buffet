@@ -2,6 +2,18 @@ import app from '../app.js';
 
 import request from 'supertest';
 
+const buildPlato = ({
+    id = 2,
+    nombre_plato = 'Costillitas',
+    precio = 123,
+    descripcion = 'test description'
+} = {}) => ({
+    id,
+    nombre_plato,
+    precio,
+    descripcion
+})
+
 describe('GET /platos', () =>{
 
     test('should respond with a 200 status code', async () =>{
@@ -9,9 +21,15 @@ describe('GET /platos', () =>{
         expect(response.statusCode).toBe(200);
     });
 
+    test('should get all platos', async () =>{
+        const plato = buildPlato();
+        const response = await request(app).get('/platos').send();
+        expect(response.body).toEqual([plato]);
+    });
+
     describe('given a platos ID', () =>{
-        test('should return an json object with the information of the given ID', async() =>{
-            const plato_ID = 18;
+        test('should respond with a 200 status code', async() =>{
+            const plato_ID = 2;
 
             const response = await request(app).get(`/platos/${plato_ID}`).expect(200);
         })
@@ -20,7 +38,7 @@ describe('GET /platos', () =>{
             const plato_ID = 1000000;
 
             const response = await request(app).get(`/platos/${plato_ID}`).send();
-            expect(response.statusCode).toBe(400);
+            expect(response.statusCode).toBe(404);
         })
     });
 });
@@ -44,11 +62,20 @@ describe('POST /platos', () =>{
     
         test('should respond with a plato ID', async () =>{
             const response = await request(app).post('/platos').send({
-                nombre_plato: "test nombre",
+                nombre_plato: "test nombre2",
                 precio: 123,
                 descripcion: "test description"
             });
             expect(response.body.id).toBeDefined();
+        });
+
+        test('should respond with a 400 status code', async () =>{
+            const response = await request(app).post('/platos').send({
+                nombre_plato: "Costillitas",
+                precio: 123,
+                descripcion: "test description"
+            });
+            expect(response.statusCode).toBe(400);
         });
     })
 
@@ -68,4 +95,27 @@ describe('POST /platos', () =>{
         });
     });
 
+});
+
+describe('PUT /platos', () =>{
+
+    describe('given a platos ID to update', () =>{
+        test('should respond with a 404 status code', async() =>{
+            const plato_ID = 70;
+
+            const response = await request(app).put(`/platos/${plato_ID}`).expect(404);
+        });
+
+        test('should have a content-type:application/json in header', async () =>{
+            const plato_ID = 2;
+
+            const response = await request(app).put(`/platos/${plato_ID}`).send({
+                nombre_plato: "Alitas",
+                precio: 123,
+                descripcion: "test description"
+            });
+            expect(response.headers["content-type"]).toEqual(expect.stringContaining("json"));
+        });
+
+    });
 });

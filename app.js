@@ -7,5 +7,6 @@ app.use(express.json());
 
 app.use('/', router);
 app.use('/platos', router);
+app.use('/usuarios', router);
 
 export default app;
