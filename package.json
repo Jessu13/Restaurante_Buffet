@@ -4,7 +4,8 @@
   "description": "Restaurante tipo buffet en Pereira, automatizacion pedidos",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "test": "set NODE_OPTIONS=--experimental-vm-modules && jest"
   },
   "type": "module",
   "author": "Juan Pablo Munoz",
@@ -16,6 +17,8 @@
     "sequelize": "^6.21.4"
   },
   "devDependencies": {
-    "nodemon": "^2.0.19"
+    "jest": "^29.2.0",
+    "nodemon": "^2.0.19",
+    "supertest": "^6.3.0"
   }
 }

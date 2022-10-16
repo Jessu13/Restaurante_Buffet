@@ -3,15 +3,23 @@ import { Plato } from "../models/Plato.js";
 const guardar_platos = async (req, res) => {
     //Validar
     const { nombre_plato, descripcion, precio } = req.body;
+
+    if (!nombre_plato || !precio || !descripcion){
+        const error = new Error("Verifique que todos los campos se hayan llenado")
+        return res.status(400).json({msg: error.message});
+    }
+
     try {
+        
+        //Guardar nuevo plato
         const nuevoPlato = await Plato.create({
             nombre_plato,
             precio,
             descripcion
 
         });
-        //res.json(nuevoPlato);
-        res.redirect('/platos');
+        res.json(nuevoPlato);
+        //res.redirect('/platos');
     } catch (error) {
         console.log(error);
     }

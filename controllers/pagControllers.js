@@ -4,34 +4,39 @@ import {Ingrediente} from '../models/Ingrediente.js';
 import {Domiciliario} from '../models/Domiciliario.js';
 
 const p_home = (req, res) => {
-    res.render('home');
-    res.send('Hello World!');
+    //res.render('home');
+    res.json({ msg: 'Hello World!'});
 }
 
 const p_platos = async (req, res) => {
     try{
         const platos = await Plato.findAll();
-        res.render('platos', {
+        /*res.render('platos', {
             platos
-        });
-        //res.json(platos)
+        });*/
+        res.json(platos)
     } catch (error) {
         return res.status(500).json({message: error.message});
     }
 }
 
 const plato = async (req, res, next) => {
-    try{
-        const {id_plato} = req.params;
-        const plato = await Plato.findOne({ where: { id: id_plato } });
+    const {id} = req.params;
 
+    const plato = await Plato.findByPk(id);
+    if(!plato){
+        const error = new Error("El plato no existe")
+        return res.status(400).json({msg: error.message});
+    }
+
+    try{
         res.json(plato);
         /*res.render('plato', {
             plato
         });*/
         
     } catch(error) {
-        next(error)
+        console.log(error);
     }
 }
 
