@@ -2,7 +2,7 @@ import { Plato } from "../models/Plato.js";
 
 const guardar_platos = async (req, res) => {
     //Validar
-    const { nombre_plato, descripcion, precio } = req.body;
+    const {nombre_plato, descripcion, precio} = req.body;
 
     if (!nombre_plato || !precio || !descripcion){
         const error = new Error("Verifique que todos los campos se hayan llenado")
