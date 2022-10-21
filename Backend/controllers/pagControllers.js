@@ -80,6 +80,27 @@ const ingrediente = async (req, res, next) => {
     }
 }
 
+const domiciliario = async (req, res, next) => {
+    const {id} = req.params;
+
+    const domiciliario = await Domiciliario.findByPk(id);
+
+    if(!domiciliario){
+        const error = new Error("El domiciliario no existe")
+        return res.status(404).json({msg: error.message});
+    }
+
+    try{
+        res.json(domiciliario);
+        /*res.render('plato', {
+            plato
+        });*/
+        
+    } catch(error) {
+        console.log(error);
+    }
+}
+
 const p_usuarios = async (req, res) => {
     try{
         const usuarios = await Usuario.findAll();
@@ -109,10 +130,10 @@ const p_ingredientes = async (req, res) => {
 const p_domiciliarios = async (req, res) => {
     try{
         const domiciliarios = await Domiciliario.findAll();
-        res.render('domiciliarios', {
+        /*res.render('domiciliarios', {
             domiciliarios
-        });
-        //res.json(domiciliarios)
+        });*/
+        res.json(domiciliarios)
     } catch (error) {
         return res.status(500).json({message: error.message});
     }
@@ -125,6 +146,7 @@ export {p_home,
         plato, 
         usuario,
         ingrediente,
+        domiciliario,
         p_usuarios,
         p_ingredientes,
         p_domiciliarios};

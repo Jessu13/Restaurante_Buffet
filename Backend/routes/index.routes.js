@@ -7,7 +7,8 @@ import {
     ingrediente,
     p_usuarios,
     p_ingredientes,
-    p_domiciliarios
+    p_domiciliarios,
+    domiciliario
 } from '../controllers/pagControllers.js';
 
 import { 
@@ -58,6 +59,7 @@ router.put('/ingredientes/:id',actualizar_ingrediente);
 router.delete('/ingredientes/:id', eliminar_ingrediente);
 
 router.get('/domiciliarios', p_domiciliarios);
+router.get('/domiciliarios/:id',domiciliario);
 router.post('/domiciliarios', guardar_domiciliarios);
 router.put('/domiciliarios/:id',actualizar_domiciliario);
 router.delete('/domiciliarios/:id', eliminar_domiciliario);

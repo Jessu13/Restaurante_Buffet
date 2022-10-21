@@ -32,26 +32,40 @@ const guardar_ingredientes = async (req, res) => {
 
 const eliminar_ingrediente = async (req, res) => {
     //Validar
+    const { id } = req.params;
+
+    const ingrediente = await Ingrediente.findByPk(id)
+
+    if(!ingrediente){
+        const error = new Error("El ingrediente no existe")
+        return res.status(404).json({msg: error.message});
+    }
+
     try {
-        const { id } = req.params;
         await Ingrediente.destroy({
             where:{
                 id,
             },
         });
-        res.sendStatus(204);
+        res.json({msg: 'El ingrediente ha sido borrado exitosamente'});
     } catch (error) {
-        return res.status(500).json({message:error.message});
+        console.log(error);
     }
 };
 
 const actualizar_ingrediente = async (req, res) => {
+    const { id } = req.params;
+    const { nombreIngrediente, cantidadDisponible, tipo_Ingrediente, precioIngrediente } = req.body;
+
+    const ingrediente = await Ingrediente.findByPk(id)
+
+    if(!ingrediente){
+        const error = new Error("El ingrediente no existe")
+        return res.status(404).json({msg: error.message});
+    }
     try {
         //Validar
-        const { id } = req.params;
-        const { nombreIngrediente, cantidadDisponible, tipo_Ingrediente, precioIngrediente } = req.body;
         
-        const ingrediente = await Ingrediente.findByPk(id)
         ingrediente.nombreIngrediente = nombreIngrediente;
         ingrediente.cantidadDisponible= cantidadDisponible;
         ingrediente.tipo_Ingrediente = tipo_Ingrediente;
