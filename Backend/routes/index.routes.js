@@ -3,6 +3,8 @@ import {
     p_home, 
     p_platos,
     plato,
+    usuario,
+    ingrediente,
     p_usuarios,
     p_ingredientes,
     p_domiciliarios
@@ -44,11 +46,13 @@ router.delete('/platos/:id', eliminar_plato);
 
 router.get('/usuarios', p_usuarios);
 router.post('/usuarios', guardar_usuario);
+router.get('/usuarios/:id',usuario);
 router.put('/usuarios/:id',actualizar_usuario);
 router.delete('/usuarios/:id', eliminar_usuario);
 
 
 router.get('/ingredientes', p_ingredientes);
+router.get('/ingredientes/:id',ingrediente);
 router.post('/ingredientes', guardar_ingredientes);
 router.put('/ingredientes/:id',actualizar_ingrediente);
 router.delete('/ingredientes/:id', eliminar_ingrediente);

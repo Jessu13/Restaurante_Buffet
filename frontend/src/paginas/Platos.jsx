@@ -38,16 +38,25 @@ const Platos = () => {
             return;
         }
 
+        setAlerta({});
+
         //Crear el usuario en la API
         try {
             const url = "http://localhost:4000/platos"
-            const respuesta = await axios.post(url, {datos})
-            console.log(respuesta)
-        } catch (error) {
-            console.log(error)
-            
+            await axios.post(url, {datos})
+            setAlerta({
+                msg: 'Creado correctamente, Sebas es gay',
+                error: false
+            })
+        } catch (error) {  
+            setAlerta({
+                msg: error.response.data.msg,
+                error: true
+            })
         }
     }
+
+    const { msg } = alerta
 
     return (
         <>
@@ -57,9 +66,9 @@ const Platos = () => {
 
 
             <div className='mt-20 md:mt-5 shadow-lg px-5 py-10 rounded-xl bg-white'>
-                <Alerta
+                { msg && <Alerta
                     alerta = {alerta}
-                />
+                />}
                 <form 
                     onSubmit={enviarDatos}
                 >

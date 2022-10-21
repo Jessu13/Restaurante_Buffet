@@ -33,16 +33,25 @@ const guardar_usuario = async (req, res) => {
 
 const eliminar_usuario = async (req, res) => {
     //Validar
+    const { id } = req.params;
+
+    const usuario = await Usuario.findByPk(id)
+
+    if(!usuario){
+        const error = new Error("El usuario no existe")
+        return res.status(404).json({msg: error.message});
+    }
+
     try {
-        const { id } = req.params;
+        
         await Usuario.destroy({
             where:{
                 id,
             },
         });
-        res.sendStatus(204);
+        res.json({msg: 'El usuario ha sido borrado exitosamente'});
     } catch (error) {
-        return res.status(500).json({message:error.message});
+        console.log(error);
     }
 };
 

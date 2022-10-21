@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.json());
 
-const dominiosPermitidos = ["http://127.0.0.1:5173"]
+/*const dominiosPermitidos = ["http://127.0.0.1:5173"]
 
 const corsOptions = {
     origin: function(origin, callback){
@@ -34,7 +34,7 @@ const corsOptions = {
     }
 }
 
-app.use(cors(corsOptions))
+app.use(cors(corsOptions))*/
 
 app.use((req, res, next) => {
     return next();

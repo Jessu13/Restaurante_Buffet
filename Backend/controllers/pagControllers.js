@@ -2,7 +2,6 @@ import {Plato} from '../models/Plato.js';
 import {Usuario} from '../models/Usuario.js';
 import {Ingrediente} from '../models/Ingrediente.js';
 import {Domiciliario} from '../models/Domiciliario.js';
-import sequelize from "sequelize";
 
 const p_home = (req, res) => {
     //res.render('home');
@@ -41,6 +40,46 @@ const plato = async (req, res, next) => {
     }
 }
 
+const usuario = async (req, res, next) => {
+    const {id} = req.params;
+
+    const usuario = await Usuario.findByPk(id);
+    if(!usuario){
+        const error = new Error("El usuario no existe")
+        return res.status(404).json({msg: error.message});
+    }
+
+    try{
+        res.json(plato);
+        /*res.render('plato', {
+            plato
+        });*/
+        
+    } catch(error) {
+        console.log(error);
+    }
+}
+
+const ingrediente = async (req, res, next) => {
+    const {id} = req.params;
+
+    const ingrediente = await Ingrediente.findByPk(id);
+    if(!ingrediente){
+        const error = new Error("El ingrediente no existe")
+        return res.status(404).json({msg: error.message});
+    }
+
+    try{
+        res.json(ingrediente);
+        /*res.render('plato', {
+            plato
+        });*/
+        
+    } catch(error) {
+        console.log(error);
+    }
+}
+
 const p_usuarios = async (req, res) => {
     try{
         const usuarios = await Usuario.findAll();
@@ -58,10 +97,10 @@ const p_usuarios = async (req, res) => {
 const p_ingredientes = async (req, res) => {
     try{
         const ingredientes = await Ingrediente.findAll();
-        res.render('ingredientes', {
+        /*res.render('ingredientes', {
             ingredientes
-        });
-        //res.json(ingredientes)
+        });*/
+        res.json(ingredientes)
     } catch (error) {
         return res.status(500).json({message: error.message});
     }
@@ -84,6 +123,8 @@ const p_domiciliarios = async (req, res) => {
 export {p_home, 
         p_platos,
         plato, 
+        usuario,
+        ingrediente,
         p_usuarios,
         p_ingredientes,
         p_domiciliarios};

@@ -3,6 +3,19 @@ import { Ingrediente } from "../models/Ingrediente.js";
 const guardar_ingredientes = async (req, res) => {
     //Validar
     const { nombreIngrediente, cantidadDisponible, tipo_Ingrediente, precioIngrediente } = req.body;
+
+    if (!nombreIngrediente || !cantidadDisponible || !tipo_Ingrediente || !precioIngrediente){
+        const error = new Error("Verifique que todos los campos se hayan llenado")
+        return res.status(400).json({msg: error.message});
+    }
+
+    const existeIngrediente = await Ingrediente.findOne(({ where: { nombreIngrediente: nombreIngrediente } }));
+
+    if (existeIngrediente){
+        const error = new Error("El Ingrediente ingresado ya existe");
+        return res.status(400).json({msg: error.message});
+    }
+
     try {
         const nuevoIngrediente = await Ingrediente.create({
             nombreIngrediente, 
@@ -10,8 +23,8 @@ const guardar_ingredientes = async (req, res) => {
             tipo_Ingrediente, 
             precioIngrediente
         });
-        //res.json(nuevoIngrediente);
-        res.redirect('/ingredientes');
+        res.json(nuevoIngrediente);
+        //res.redirect('/ingredientes');
     } catch (error) {
         console.log(error);
     }

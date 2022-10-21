@@ -2,10 +2,10 @@ import app from '../app.js';
 
 import request from 'supertest';
 
-const buildPlato = ({
+/*const buildPlato = ({
     id = 2,
     nombre_plato = 'Costillitas',
-    precio = 123,
+    precio = "123",
     descripcion = 'test description'
 } = {}) => ({
     id,
@@ -72,7 +72,7 @@ describe('POST /platos', () =>{
         test('should respond with a 400 status code', async () =>{
             const response = await request(app).post('/platos').send({
                 nombre_plato: "Costillitas",
-                precio: 123,
+                precio: "123",
                 descripcion: "test description"
             });
             expect(response.statusCode).toBe(400);
@@ -90,14 +90,14 @@ describe('POST /platos', () =>{
             
             for (const body of fields){
                 const response = await request(app).post('/platos').send(body);
-                expect(response.statusCode).toBe(400);
+                expect(response.body).toEqual({msg : 'Verifique que todos los campos se hayan llenado'});
             }
         });
     });
 
 });
 
-describe('PUT /platos', () =>{
+describe('PUT /platos/:id', () =>{
 
     describe('given a platos ID to update', () =>{
         test('should respond with a 404 status code', async() =>{
@@ -117,5 +117,47 @@ describe('PUT /platos', () =>{
             expect(response.headers["content-type"]).toEqual(expect.stringContaining("json"));
         });
 
+        test('should return object equal to the value updated', async () =>{
+            const plato_ID = 2;
+
+            const response = await request(app).put(`/platos/${plato_ID}`).send({
+                nombre_plato: "Alitas",
+                precio: 123,
+                descripcion: "test description"
+            });
+            expect(response.body).toEqual({
+                id: 2,
+                nombre_plato: "Alitas",
+                precio: 123,
+                descripcion: "test description"
+            });
+        });
+
     });
 });
+
+describe('DELETE /platos/:id', () =>{
+
+    describe('given a platos ID to delete', () =>{
+        test('should respond with a 404 status code', async() =>{
+            const plato_ID = 70;
+
+            const response = await request(app).delete(`/platos/${plato_ID}`).expect(404);
+        });
+
+        test('should return error message', async() =>{
+            const plato_ID = 70;
+
+            const response = await request(app).delete(`/platos/${plato_ID}`).send();
+            expect(response.body).toEqual({msg : 'El plato no existe'});
+        });
+
+        test('should return succes message', async() =>{
+            const plato_ID = 2;
+
+            const response = await request(app).delete(`/platos/${plato_ID}`).send();
+            expect(response.body).toEqual({msg : 'El plato ha sido borrado exitosamente'});
+        });
+
+    });
+});*/
