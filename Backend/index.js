@@ -13,9 +13,6 @@ db.authenticate()
 // Puerto
 const port = 4000;
 
-// PUG
-app.set('view engine', 'pug');
-
 // Leer form
 app.use(express.urlencoded({ extended: true }));
 
